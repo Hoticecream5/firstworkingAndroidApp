@@ -3,6 +3,7 @@ package joe.com.steveapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -27,9 +28,11 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private Button confirmOrderBtn;
     private EditText userNameTxt,userNumber;
 
-    private String name,phone_Number,finalMessage, productPrice,orderNumbr,hseNum,
-            addrs,blkNum,resName,roomNum,rest_Address,user_Address, rest_Name, productName;
+    private String name,phone_Number,finalMessage, productPrice,
+            orderNumbr,hseNum,drvNumber = "0848083305",addrs,blkNum,resName,roomNum
+            ,rest_Address,user_Address, rest_Name, productName;
     private int count;
+    private final static int My_PERMISSION_REQUEST_SEND_SMS = 0;
 
 
     @Override
@@ -37,7 +40,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_final_order);
 
-        confirmOrderBtn =  findViewById(R.id.confirm_final_order_btn);
+        confirmOrderBtn = findViewById(R.id.confirm_final_order_btn);
         userNameTxt = findViewById(R.id.shippment_name);
         userNumber = findViewById(R.id.shippment_phone_number);
 
@@ -60,15 +63,46 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ConfirmFinalOrderActivity.this, "click send to send sms to driver ",Toast.LENGTH_LONG).show();
-              smsMessage();
+                messageToSend();
             }
         });
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
+
+            }
+            else {
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, My_PERMISSION_REQUEST_SEND_SMS);
+
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case My_PERMISSION_REQUEST_SEND_SMS:
+                {
+
+                if (grantResults.length > 0 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    confirmOrderBtn.setEnabled(true);
+                } else {
+                    Toast.makeText(this, "Permission is needed to send SMS to driver", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+        }
     }
 
     public void messageToSend(){
-    count = count+1;
-
+        count = count+1;
+        name = userNameTxt.getText().toString();
+        phone_Number = userNumber.getText().toString();
+        if(!TextUtils.isEmpty( name)&&!TextUtils.isEmpty(phone_Number))
+        {
         if (TextUtils.isEmpty(orderNumbr) && TextUtils.isEmpty(resName)) {
             finalMessage = "Name: " + name + "\n" +
                     "Phone Number: " + phone_Number + "\n" +
@@ -110,29 +144,16 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                     "Product Price: " + productPrice + "\n" +
                     "Number Of Trips: " + count + "\n" +
                     "Order Number " + orderNumbr;
-        }
+
+                     }
+
+                SmsManager smsManager=SmsManager.getDefault();
+                smsManager.sendTextMessage(drvNumber,null,finalMessage,null,null);
+
+            }
+        emptyCart();
     }
 
-
-    private void smsMessage() {
-        name = userNameTxt.getText().toString();
-        phone_Number = userNumber.getText().toString();
-        if ((TextUtils.isEmpty(name)) || (TextUtils.isEmpty(phone_Number))) {
-            Toast.makeText(ConfirmFinalOrderActivity.this, "Fill in your name and phone number ", Toast.LENGTH_LONG).show();
-        } else {
-
-            messageToSend();
-
-            String phoneNumber = "+27732921905";
-
-            Uri sms_uri = Uri.parse("smsto:" + phoneNumber);
-            Intent sms_intent = new Intent(Intent.ACTION_VIEW, sms_uri);
-            sms_intent.setData(sms_uri);
-            sms_intent.putExtra("sms_body", finalMessage);
-            startActivity(sms_intent);
-            emptyCart();
-        }
-    }
     public void emptyCart(){
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
