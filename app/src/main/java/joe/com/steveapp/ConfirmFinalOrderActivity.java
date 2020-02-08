@@ -29,7 +29,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private EditText userNameTxt,userNumber;
 
     private String name,phone_Number,finalMessage, productPrice,
-            orderNumbr,hseNum,drvNumber = "0848083305",addrs,blkNum,resName,roomNum
+            orderNumbr,hseNum,drvNumber = "+xx xxx xxxx",addrs,blkNum,resName,roomNum
             ,rest_Address,user_Address, rest_Name, productName;
     private int count;
     private final static int My_PERMISSION_REQUEST_SEND_SMS = 0;
