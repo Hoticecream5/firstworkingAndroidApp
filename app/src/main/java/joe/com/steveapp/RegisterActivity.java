@@ -110,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity
 
         String phoneNumber =  InputPhoneNumber.getText().toString();
 
-        if(phoneNumber.charAt(0) == '0'){
+        if(phoneNumber.charAt(0) == 0){
             phone  = phoneNumber.replace("0","+27");
         }
         else {
