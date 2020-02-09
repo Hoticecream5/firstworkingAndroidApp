@@ -18,21 +18,27 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+
+import java.lang.reflect.Member;
 
 import joe.com.steveapp.Prevalent.Prevalent;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private Button confirmOrderBtn;
     private EditText userNameTxt,userNumber;
-
     private String name,phone_Number,finalMessage, productPrice,
-            orderNumbr,hseNum,drvNumber = "+xx xxx xxxx",addrs,blkNum,resName,roomNum
+            orderNumbr,hseNum,addrs,blkNum,resName,roomNum
             ,rest_Address,user_Address, rest_Name, productName;
     private int count;
-    private final static int My_PERMISSION_REQUEST_SEND_SMS = 0;
+    DatabaseReference reff;
+    Customers customers;
+    long maxId = 0 ;
 
 
     @Override
@@ -43,6 +49,22 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         confirmOrderBtn = findViewById(R.id.confirm_final_order_btn);
         userNameTxt = findViewById(R.id.shippment_name);
         userNumber = findViewById(R.id.shippment_phone_number);
+        customers = new Customers();
+        reff = FirebaseDatabase.getInstance().getReference().child("Customers");
+
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    maxId = (dataSnapshot.getChildrenCount());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         Bundle bundle = getIntent().getExtras();
@@ -68,7 +90,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         });
 
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+       /* if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
 
@@ -95,64 +117,70 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                 break;
             }
         }
+    }*/
     }
 
-    public void messageToSend(){
-        count = count+1;
+    public void messageToSend() {
+        count = count + 1;
         name = userNameTxt.getText().toString();
         phone_Number = userNumber.getText().toString();
-        if(!TextUtils.isEmpty( name)&&!TextUtils.isEmpty(phone_Number))
-        {
-        if (TextUtils.isEmpty(orderNumbr) && TextUtils.isEmpty(resName)) {
-            finalMessage = "Name: " + name + "\n" +
-                    "Phone Number: " + phone_Number + "\n" +
-                    "Address: " + addrs + "\n" +
-                    "Product name: " + productName + "\n" +
-                    "Product Price: " + productPrice + "\n" +
-                    "Number Of Trips: " + count + "\n" +
-                    "House Number: " + hseNum + "\n";
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone_Number)) {
+            if (TextUtils.isEmpty(orderNumbr) && TextUtils.isEmpty(resName)) {
+                finalMessage = "Name: " + name + "\n" +
+                        "Phone Number: " + phone_Number + "\n" +
+                        "Address: " + addrs + "\n" +
+                        "Product name: " + productName + "\n" +
+                        "Product Price: " + productPrice + "\n" +
+                        "Number Of Trips: " + count + "\n" +
+                        "House Number: " + hseNum + "\n";
 
-        } else if (TextUtils.isEmpty(orderNumbr) && TextUtils.isEmpty(hseNum)) {
+            } else if (TextUtils.isEmpty(orderNumbr) && TextUtils.isEmpty(hseNum)) {
 
-            finalMessage = "Name: " + name + "\n" +
-                    "Phone Number: " + phone_Number + "\n" +
-                    "Residence Name: " + resName + "\n" +
-                    "Block Number: " + blkNum + "\n" +
-                    "Product name: " + productName + "\n" +
-                    "Product Price: " + productPrice + "\n" +
-                    "Number Of Trips: " + count + "\n" +
-                    "Room Number: " + roomNum + "\n";
+                finalMessage = "Name: " + name + "\n" +
+                        "Phone Number: " + phone_Number + "\n" +
+                        "Residence Name: " + resName + "\n" +
+                        "Block Number: " + blkNum + "\n" +
+                        "Product name: " + productName + "\n" +
+                        "Product Price: " + productPrice + "\n" +
+                        "Number Of Trips: " + count + "\n" +
+                        "Room Number: " + roomNum + "\n";
 
 
-        } else if (TextUtils.isEmpty(resName)) {
-            finalMessage = "Name: " + name + "\n" +
-                    "Phone Number: " + phone_Number + "\n" +
-                    "Delivery Address: " + user_Address + "\n" +
-                    "Restaurant Address: " + rest_Address + "\n" +
-                    "Restaurant Name: " +rest_Name + "\n" +
-                    "Product name: " + productName + "\n" +
-                    "Product Price: " + productPrice + "\n" +
-                    "Number Of Trips: " + count + "\n" +
-                    "Order Number: " + orderNumbr;
-        } else if (TextUtils.isEmpty(addrs) && TextUtils.isEmpty(hseNum)) {
-            finalMessage = "Name: " + name + "\n" +
-                    "Phone Number: " + phone_Number + "\n" +
-                    "Delivery Address: " + user_Address + "\n" +
-                    "Restaurant Address: " + rest_Address + "\n" +
-                    "Restaurant Name: " +rest_Name + "\n" +
-                    "Product name: " + productName + "\n" +
-                    "Product Price: " + productPrice + "\n" +
-                    "Number Of Trips: " + count + "\n" +
-                    "Order Number " + orderNumbr;
+            } else if (TextUtils.isEmpty(resName)) {
+                finalMessage = "Name: " + name + "\n" +
+                        "Phone Number: " + phone_Number + "\n" +
+                        "Delivery Address: " + user_Address + "\n" +
+                        "Restaurant Address: " + rest_Address + "\n" +
+                        "Restaurant Name: " + rest_Name + "\n" +
+                        "Product name: " + productName + "\n" +
+                        "Product Price: " + productPrice + "\n" +
+                        "Number Of Trips: " + count + "\n" +
+                        "Order Number: " + orderNumbr;
+            } else if (TextUtils.isEmpty(addrs) && TextUtils.isEmpty(hseNum)) {
+                finalMessage = "Name: " + name + "\n" +
+                        "Phone Number: " + phone_Number + "\n" +
+                        "Delivery Address: " + user_Address + "\n" +
+                        "Restaurant Address: " + rest_Address + "\n" +
+                        "Restaurant Name: " + rest_Name + "\n" +
+                        "Product name: " + productName + "\n" +
+                        "Product Price: " + productPrice + "\n" +
+                        "Number Of Trips: " + count + "\n" +
+                        "Order Number " + orderNumbr;
 
-                     }
+            }
+            customers.setFinalMessage(finalMessage);
+           // reff.child(String.valueOf(maxId + 1)).setValue(customers);
+            reff.push().setValue(customers);
 
-                SmsManager smsManager=SmsManager.getDefault();
+        }
+    }
+
+            /*    SmsManager smsManager=SmsManager.getDefault();
                 smsManager.sendTextMessage(drvNumber,null,finalMessage,null,null);
 
             }
         emptyCart();
-    }
+    }*/
 
     public void emptyCart(){
 

@@ -54,6 +54,14 @@
             android:textColor="@color/colorPrimaryDark"
             />
 
+        <FrameLayout
+            android:id="@+id/native_ad"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+        </FrameLayout>
+
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
