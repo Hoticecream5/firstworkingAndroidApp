@@ -2,15 +2,9 @@ package joe.com.steveapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
-import android.telephony.SmsManager;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -186,62 +180,62 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
             }
 
             if ((productName == null)) {
-                customers.setProductName(" ");
+                customers.setProduct_Name(" ");
             } else {
-                customers.setProductName(productName);
+                customers.setProduct_Name(productName);
             }
             if (resName == null) {
-                customers.setResName(" ");
+                customers.setResidence_Name(" ");
             } else {
-                customers.setResName(resName);
+                customers.setResidence_Name(resName);
             }
             if (rest_Address == null) {
-                customers.setRest_Address(" ");
+                customers.setRestaurant_Address(" ");
             } else {
-                customers.setRest_Address(rest_Address);
+                customers.setRestaurant_Address(rest_Address);
             }
             if (rest_Name == null) {
-                customers.setResName(" ");
+                customers.setRestaurant_Name(" ");
             } else {
-                customers.setRest_Name(rest_Name);
+                customers.setRestaurant_Name(rest_Name);
             }
 
             if (roomNum == null) {
-                customers.setRoomNum(" ");
+                customers.setRoom_Number(" ");
             } else {
-                customers.setRoomNum(roomNum);
+                customers.setRoom_Number(roomNum);
             }
             if (blkNum == null) {
-                customers.setBlkNum(" ");
+                customers.setBlock_Numner(" ");
             } else {
-                customers.setBlkNum(blkNum);
+                customers.setBlock_Numner(blkNum);
             }
             if (productPrice == null) {
-                customers.setProductPrice(" ");
+                customers.setProduct_Price(" ");
             } else {
-                customers.setProductPrice(productPrice);
+                customers.setProduct_Price(productPrice);
             }
             if (orderNumbr == null) {
-                customers.setOrderNumbr(" ");
+                customers.setOrder_Number(" ");
             } else {
-                customers.setOrderNumbr(orderNumbr);
+                customers.setOrder_Number(orderNumbr);
             }
 
             if (addrs == null) {
-                customers.setAddrs(" ");
+                customers.setAddress(" ");
             } else {
-                customers.setAddrs(addrs);
+                customers.setAddress(addrs);
             }
 
             if (hseNum == null) {
-                customers.setHseNum(" ");
+                customers.setHouse_Number(" ");
             } else {
-                customers.setHseNum(hseNum);
+                customers.setHouse_Number(hseNum);
             }
             if (String.valueOf(count) == null) {
-                customers.setCount(" ");
+                customers.setNumber_Of_Rides(" ");
             } else {
-                customers.setCount(String.valueOf(count));
+                customers.setNumber_Of_Rides(String.valueOf(count));
             }
             if (user_Address == null) {
                 customers.setUser_Address(" ");
@@ -274,17 +268,17 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
                         userdataMap.put("Name", name);
                         userdataMap.put("Phone_Number", phone_Number);
                         userdataMap.put("Product_Name", productName);
-                        userdataMap.put("Residnce Name", resName);
-                        userdataMap.put("Room Number", roomNum);
-                        userdataMap.put("Block Number", blkNum);
-                        userdataMap.put("Order", orderNumbr);
+                        userdataMap.put("Residnce_Name", resName);
+                        userdataMap.put("Room_Number", roomNum);
+                        userdataMap.put("Block_Number", blkNum);
+                        userdataMap.put("Order_Number", orderNumbr);
                         userdataMap.put("Addrress", addrs);
-                        userdataMap.put("House Number", hseNum);
-                        userdataMap.put("User Address", user_Address);
-                        userdataMap.put("Restaurant Address", rest_Address);
-                        userdataMap.put("Restaurant Name", rest_Name);
-                        userdataMap.put("Number of Rides", count);
-                        userdataMap.put("Product Price", productPrice);
+                        userdataMap.put("House_Number", hseNum);
+                        userdataMap.put("User_Address", user_Address);
+                        userdataMap.put("Restaurant_Address", rest_Address);
+                        userdataMap.put("Restaurant_Name", rest_Name);
+                        userdataMap.put("Number_Of_Rides", count);
+                        userdataMap.put("Product_Price", productPrice);
 
 
                         RootRef.child("Customers").child(name).updateChildren(userdataMap)

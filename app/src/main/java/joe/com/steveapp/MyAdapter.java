@@ -32,21 +32,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+
+
         holder.name.setText(customer.get(position).getName());
         holder.phone_Num.setText(customer.get(position).getPhone_Number());
-        holder.prod_Name.setText(customer.get(position).getProductName());
-        holder.customer_Res_Name.setText(customer.get(position).getResName());
+        holder.prod_Name.setText(customer.get(position).getProduct_Name());
+        holder.customer_Res_Name.setText(customer.get(position).getResidence_Name());
 
-        holder.restaurant_Address.setText(customer.get(position).getRest_Address());
-        holder.restaurant_Name.setText(customer.get(position).getRest_Name());
-        holder.room_Number.setText(customer.get(position).getRoomNum());
-        holder.block_Number.setText(customer.get(position).getBlkNum());
+        holder.restaurant_Address.setText(customer.get(position).getRestaurant_Address());
+        holder.restaurant_Name.setText(customer.get(position).getRestaurant_Name());
+        holder.room_Number.setText(customer.get(position).getRoom_Number());
+        holder.block_Number.setText(customer.get(position).getBlock_Numner());
 
-        holder.product_Price.setText(customer.get(position).getProductPrice());
-        holder.order_Number.setText(customer.get(position).getOrderNumbr());
-        holder.address.setText(customer.get(position).getAddrs());
-        holder.house_Number.setText(customer.get(position).getHseNum());
-        holder.counter.setText(customer.get(position).getCount());
+        holder.product_Price.setText(customer.get(position).getProduct_Price());
+        holder.order_Number.setText(customer.get(position).getOrder_Number());
+        holder.address.setText(customer.get(position).getAddress());
+        holder.house_Number.setText(customer.get(position).getHouse_Number());
+        holder.counter.setText(customer.get(position).getNumber_Of_Rides());
         holder.customer_Address.setText(customer.get(position).getUser_Address());
 
         if(customer.get(position).getPermission()) {

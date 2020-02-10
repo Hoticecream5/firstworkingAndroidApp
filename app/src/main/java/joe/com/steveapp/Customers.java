@@ -1,143 +1,142 @@
 package joe.com.steveapp;
 
 public class Customers {
-    public String name,phone_Number,resName ,
-            blkNum,productName , productPrice , count, roomNum,
-            user_Address ,rest_Address , rest_Name, orderNumbr
-            ,hseNum,addrs;
+    public String Name,Block_Numner,Phone_Number,Product_Price,Residence_Name
+            ,Room_Number,Number_Of_Rides,Order_Number,User_Address,Restaurant_Name,Restaurant_Address,
+            House_Number,Product_Name,Addresss;
     public boolean permission;
 
     public Customers() {
     }
 
-    public Customers(String name, String phone_Number, String resName, String blkNum, String productName, String productPrice, String count, String roomNum, String user_Address, String rest_Address, String rest_Name, String orderNumbr, String hseNum, String addrs, boolean permission) {
-        this.name = name;
-        this.phone_Number = phone_Number;
-        this.resName = resName;
-        this.blkNum = blkNum;
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.count = count;
-        this.roomNum = roomNum;
-        this.user_Address = user_Address;
-        this.rest_Address = rest_Address;
-        this.rest_Name = rest_Name;
-        this.orderNumbr = orderNumbr;
-        this.hseNum = hseNum;
-        this.addrs = addrs;
+    public Customers(String name, String block_Numner, String phone_Number, String product_Price, String residence_Name, String room_Number, String number_Of_Rides, String order_Number, String user_Address, String restaurant_Name, String restaurant_Address, String house_Number, String product_Name, String addresss, boolean permission) {
+        Name = name;
+        Block_Numner = block_Numner;
+        Phone_Number = phone_Number;
+        Product_Price = product_Price;
+        Residence_Name = residence_Name;
+        Room_Number = room_Number;
+        Number_Of_Rides = number_Of_Rides;
+        Order_Number = order_Number;
+        User_Address = user_Address;
+        Restaurant_Name = restaurant_Name;
+        Restaurant_Address = restaurant_Address;
+        House_Number = house_Number;
+        Product_Name = product_Name;
+        Addresss = addresss;
         this.permission = permission;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
+    }
+
+    public String getBlock_Numner() {
+        return Block_Numner;
+    }
+
+    public void setBlock_Numner(String block_Numner) {
+        Block_Numner = block_Numner;
     }
 
     public String getPhone_Number() {
-        return phone_Number;
+        return Phone_Number;
     }
 
     public void setPhone_Number(String phone_Number) {
-        this.phone_Number = phone_Number;
+        Phone_Number = phone_Number;
     }
 
-    public String getResName() {
-        return resName;
+    public String getProduct_Price() {
+        return Product_Price;
     }
 
-    public void setResName(String resName) {
-        this.resName = resName;
+    public void setProduct_Price(String product_Price) {
+        Product_Price = product_Price;
     }
 
-    public String getBlkNum() {
-        return blkNum;
+    public String getResidence_Name() {
+        return Residence_Name;
     }
 
-    public void setBlkNum(String blkNum) {
-        this.blkNum = blkNum;
+    public void setResidence_Name(String residence_Name) {
+        Residence_Name = residence_Name;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getRoom_Number() {
+        return Room_Number;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setRoom_Number(String room_Number) {
+        Room_Number = room_Number;
     }
 
-    public String getProductPrice() {
-        return productPrice;
+    public String getNumber_Of_Rides() {
+        return Number_Of_Rides;
     }
 
-    public void setProductPrice(String productPrice) {
-        this.productPrice = productPrice;
+    public void setNumber_Of_Rides(String number_Of_Rides) {
+        Number_Of_Rides = number_Of_Rides;
     }
 
-    public String getCount() {
-        return count;
+    public String getOrder_Number() {
+        return Order_Number;
     }
 
-    public void setCount(String count) {
-        this.count = count;
-    }
-
-    public String getRoomNum() {
-        return roomNum;
-    }
-
-    public void setRoomNum(String roomNum) {
-        this.roomNum = roomNum;
+    public void setOrder_Number(String order_Number) {
+        Order_Number = order_Number;
     }
 
     public String getUser_Address() {
-        return user_Address;
+        return User_Address;
     }
 
     public void setUser_Address(String user_Address) {
-        this.user_Address = user_Address;
+        User_Address = user_Address;
     }
 
-    public String getRest_Address() {
-        return rest_Address;
+    public String getRestaurant_Name() {
+        return Restaurant_Name;
     }
 
-    public void setRest_Address(String rest_Address) {
-        this.rest_Address = rest_Address;
+    public void setRestaurant_Name(String restaurant_Name) {
+        Restaurant_Name = restaurant_Name;
     }
 
-    public String getRest_Name() {
-        return rest_Name;
+    public String getRestaurant_Address() {
+        return Restaurant_Address;
     }
 
-    public void setRest_Name(String rest_Name) {
-        this.rest_Name = rest_Name;
+    public void setRestaurant_Address(String restaurant_Address) {
+        Restaurant_Address = restaurant_Address;
     }
 
-    public String getOrderNumbr() {
-        return orderNumbr;
+    public String getHouse_Number() {
+        return House_Number;
     }
 
-    public void setOrderNumbr(String orderNumbr) {
-        this.orderNumbr = orderNumbr;
+    public void setHouse_Number(String house_Number) {
+        House_Number = house_Number;
     }
 
-    public String getHseNum() {
-        return hseNum;
+    public String getProduct_Name() {
+        return Product_Name;
     }
 
-    public void setHseNum(String hseNum) {
-        this.hseNum = hseNum;
+    public void setProduct_Name(String product_Name) {
+        Product_Name = product_Name;
     }
 
-    public String getAddrs() {
-        return addrs;
+    public String getAddress() {
+        return Addresss;
     }
 
-    public void setAddrs(String addrs) {
-        this.addrs = addrs;
+    public void setAddress(String addresss) {
+        Addresss = addresss;
     }
 
     public boolean getPermission() {
