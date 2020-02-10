@@ -5,10 +5,28 @@ public class Customers {
             blkNum,productName , productPrice , count, roomNum,
             user_Address ,rest_Address , rest_Name, orderNumbr
             ,hseNum,addrs;
+    public boolean permission;
 
     public Customers() {
     }
 
+    public Customers(String name, String phone_Number, String resName, String blkNum, String productName, String productPrice, String count, String roomNum, String user_Address, String rest_Address, String rest_Name, String orderNumbr, String hseNum, String addrs, boolean permission) {
+        this.name = name;
+        this.phone_Number = phone_Number;
+        this.resName = resName;
+        this.blkNum = blkNum;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.count = count;
+        this.roomNum = roomNum;
+        this.user_Address = user_Address;
+        this.rest_Address = rest_Address;
+        this.rest_Name = rest_Name;
+        this.orderNumbr = orderNumbr;
+        this.hseNum = hseNum;
+        this.addrs = addrs;
+        this.permission = permission;
+    }
 
     public String getName() {
         return name;
@@ -120,5 +138,13 @@ public class Customers {
 
     public void setAddrs(String addrs) {
         this.addrs = addrs;
+    }
+
+    public boolean getPermission() {
+        return permission;
+    }
+
+    public void setPermission(boolean permission) {
+        this.permission = permission;
     }
 }

@@ -3,8 +3,7 @@
     package="joe.com.steveapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,11 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ReceiverActivity"></activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
-        <activity android:name=".AllDoneActivity"></activity>
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <activity android:name=".AllDoneActivity" />
         <activity android:name=".FoodOrderActivity" />
         <activity android:name=".SelectCartItemActivity" />
         <activity android:name=".VerifyNumberActivity" />

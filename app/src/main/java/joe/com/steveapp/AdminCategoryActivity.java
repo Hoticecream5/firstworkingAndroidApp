@@ -29,7 +29,14 @@ public class AdminCategoryActivity extends AppCompatActivity
         CheckOrdersBtn = (Button) findViewById(R.id.check_orders_btn);
         maintainProductsBtn = (Button) findViewById(R.id.maintain_btn);
 
-
+        CheckOrdersBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminCategoryActivity.this, ReceiverActivity.class);
+                intent.putExtra("Admin", "Admin");
+                startActivity(intent);
+            }
+        });
 
         maintainProductsBtn.setOnClickListener(new View.OnClickListener() {
             @Override

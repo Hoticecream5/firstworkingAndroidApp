@@ -25,7 +25,7 @@ import joe.com.steveapp.Model.Products;
 
 public class AdminMaintainProductsActivity extends AppCompatActivity
 {
-    private Button applyChangesBtn, deleteBtn;
+    private Button applyChangesBtn, deleteBtn,checkOrders;
     private EditText name, price, description;
     private ImageView imageView;
 
@@ -52,6 +52,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity
         description = findViewById(R.id.product_description_maintain);
         imageView = findViewById(R.id.product_image_maintain);
         deleteBtn = findViewById(R.id.delete_product_btn);
+
 
 
         displaySpecificProductInfo();
