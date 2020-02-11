@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.lang.reflect.Member;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import joe.com.steveapp.Prevalent.Prevalent;
@@ -81,6 +83,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
         messageToSend();
             }
         });
@@ -121,7 +124,16 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
         name = userNameTxt.getText().toString();
         phone_Number = userNumber.getText().toString();
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone_Number)) {
-            Toast.makeText(this, "Please enter name and phone number ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfirmFinalOrderActivity.this, "Please enter name and phone number ", Toast.LENGTH_SHORT).show();
+        }
+        final String saveCurrentTime, saveCurrentDate;
+
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        saveCurrentTime = currentTime.format(calForDate.getTime());
           /*  if (TextUtils.isEmpty(orderNumbr) && TextUtils.isEmpty(resName)) {
                 finalMessage = "Name: " + name + "\n" +
                         "Phone Number: " + phone_Number + "\n" +
@@ -216,7 +228,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
                 customers.setProduct_Price(productPrice);
             }
             if (orderNumbr == null) {
-                customers.setOrder_Number(" ");
+                customers.setOrder_Number("00");
             } else {
                 customers.setOrder_Number(orderNumbr);
             }
@@ -279,6 +291,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
                         userdataMap.put("Restaurant_Name", rest_Name);
                         userdataMap.put("Number_Of_Rides", count);
                         userdataMap.put("Product_Price", productPrice);
+                        userdataMap.put("Date", saveCurrentDate);
+                        userdataMap.put("Time", saveCurrentTime);
 
 
                         RootRef.child("Customers").child(name).updateChildren(userdataMap)
@@ -317,7 +331,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
 
         }
     }
-}
+
 
 
 

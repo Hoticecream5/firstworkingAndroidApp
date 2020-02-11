@@ -24,7 +24,7 @@ public class ReceiverActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Customers> list;
     MyAdapter adapter;
-    Customers customers;
+   Customers customer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +39,13 @@ public class ReceiverActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list = new ArrayList<Customers>();
+                Toast.makeText(ReceiverActivity.this,"Under construction",Toast.LENGTH_SHORT).show();
+
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
-                    Customers c = dataSnapshot1.getValue(Customers.class);
-                    list.add(c);
+
+                    customer = dataSnapshot1.getValue(Customers.class);
+                    list.add(customer);
                 }
                 adapter = new MyAdapter(ReceiverActivity.this,list);
                 recyclerView.setAdapter(adapter);
