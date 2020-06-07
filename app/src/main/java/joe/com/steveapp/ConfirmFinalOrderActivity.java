@@ -31,8 +31,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
     static final long serialUID = 40L;
     private Button confirmOrderBtn;
     private EditText userNameTxt, userNumber;
-    private String name, phone_Number, finalMessage, productPrice,
-            orderNumbr, hseNum, addrs, blkNum, resName, roomNum, rest_Address, user_Address, rest_Name, productName;
+    private String productPrice, orderNumbr, hseNum, addrs, blkNum, resName, roomNum, rest_Address,
+            user_Address, rest_Name, productName;
     private int count;
     DatabaseReference reff;
     Customers customers;
@@ -80,6 +80,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
         productPrice = bundle.getString("price");
 
 
+
+
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,99 +91,27 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
         });
 
 
-       /* if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
-
-            }
-            else {
-
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, My_PERMISSION_REQUEST_SEND_SMS);
-
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case My_PERMISSION_REQUEST_SEND_SMS:
-                {
-
-                if (grantResults.length > 0 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    confirmOrderBtn.setEnabled(true);
-                } else {
-                    Toast.makeText(this, "Permission is needed to send SMS to driver", Toast.LENGTH_LONG).show();
-                }
-                break;
-            }
-        }
-    }*/
     }
 
     public void messageToSend() {
         count = count + 1;
-        name = userNameTxt.getText().toString();
-        phone_Number = userNumber.getText().toString();
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone_Number)) {
+        final String  name = userNameTxt.getText().toString();
+        final String phone_Number = userNumber.getText().toString();
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(phone_Number)) {
             Toast.makeText(ConfirmFinalOrderActivity.this, "Please enter name and phone number ", Toast.LENGTH_SHORT).show();
-        }
-        final String saveCurrentTime, saveCurrentDate;
+        } else {
+            final String saveCurrentTime, saveCurrentDate;
 
-        Calendar calForDate = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-        saveCurrentDate = currentDate.format(calForDate.getTime());
+            Calendar calForDate = Calendar.getInstance();
+            SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+            saveCurrentDate = currentDate.format(calForDate.getTime());
 
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentTime.format(calForDate.getTime());
-          /*  if (TextUtils.isEmpty(orderNumbr) && TextUtils.isEmpty(resName)) {
-                finalMessage = "Name: " + name + "\n" +
-                        "Phone Number: " + phone_Number + "\n" +
-                        "Address: " + addrs + "\n" +
-                        "Product name: " + productName + "\n" +
-                        "Product Price: " + productPrice + "\n" +
-                        "Number Of Trips: " + count + "\n" +
-                        "House Number: " + hseNum + "\n";
+            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+            saveCurrentTime = currentTime.format(calForDate.getTime());
 
-            } else if (TextUtils.isEmpty(orderNumbr) && TextUtils.isEmpty(hseNum)) {
-
-                finalMessage = "Name: " + name + "\n" +
-                        "Phone Number: " + phone_Number + "\n" +
-                        "Residence Name: " + resName + "\n" +
-                        "Block Number: " + blkNum + "\n" +
-                        "Product name: " + productName + "\n" +
-                        "Product Price: " + productPrice + "\n" +
-                        "Number Of Trips: " + count + "\n" +
-                        "Room Number: " + roomNum + "\n";
-
-
-            } else if (TextUtils.isEmpty(resName)) {
-                finalMessage = "Name: " + name + "\n" +
-                        "Phone Number: " + phone_Number + "\n" +
-                        "Delivery Address: " + user_Address + "\n" +
-                        "Restaurant Address: " + rest_Address + "\n" +
-                        "Restaurant Name: " + rest_Name + "\n" +
-                        "Product name: " + productName + "\n" +
-                        "Product Price: " + productPrice + "\n" +
-                        "Number Of Trips: " + count + "\n" +
-                        "Order Number: " + orderNumbr;
-            } else if (TextUtils.isEmpty(addrs) && TextUtils.isEmpty(hseNum)) {
-                finalMessage = "Name: " + name + "\n" +
-                        "Phone Number: " + phone_Number + "\n" +
-                        "Delivery Address: " + user_Address + "\n" +
-                        "Restaurant Address: " + rest_Address + "\n" +
-                        "Restaurant Name: " + rest_Name + "\n" +
-                        "Product name: " + productName + "\n" +
-                        "Product Price: " + productPrice + "\n" +
-                        "Number Of Trips: " + count + "\n" +
-                        "Order Number " + orderNumbr;
-
-            }
-            //reff.child(String.valueOf(maxId + 1)).setValue(customers);
-            //Intent intent = new Intent(this, AllDoneActivity.class);*/
 
             if (name == null) {
-                customers.setName(" ");
+                customers.setName("default");
             } else {
                 customers.setName(name);
             }
@@ -228,7 +158,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
                 customers.setProduct_Price(productPrice);
             }
             if (orderNumbr == null) {
-                customers.setOrder_Number("00");
+                customers.setOrder_Number("0000");
             } else {
                 customers.setOrder_Number(orderNumbr);
             }
@@ -313,7 +243,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
                                     }
                                 });
                     } else {
-                        Toast.makeText(ConfirmFinalOrderActivity.this, "This " + finalMessage + " already exists.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ConfirmFinalOrderActivity.this, "This " + " already exists.", Toast.LENGTH_SHORT).show();
 
                         Toast.makeText(ConfirmFinalOrderActivity.this, "Please try again using another Email address.", Toast.LENGTH_SHORT).show();
 
@@ -328,7 +258,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
 
                 }
             });
-
+        }
         }
     }
 

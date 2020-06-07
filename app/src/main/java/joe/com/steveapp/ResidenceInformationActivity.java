@@ -58,7 +58,7 @@ private ProgressDialog loadingBar;
         }
         else if (TextUtils.isEmpty(blckNmber))
         {
-            Toast.makeText(this, "Please write your house number...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write your block number...", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(roomNumber))
         {

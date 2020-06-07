@@ -3,6 +3,8 @@ package joe.com.steveapp;
 
 import android.os.Bundle;
 
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,34 +23,31 @@ import java.util.ArrayList;
 public class ReceiverActivity extends AppCompatActivity {
 
     DatabaseReference reference;
-    RecyclerView recyclerView;
-    ArrayList<Customers> list;
-    MyAdapter adapter;
+    private ListView listView;
    Customers customer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receiver);
 
-        recyclerView = (RecyclerView) findViewById(R.id.myRecycler);
-        recyclerView.setLayoutManager( new LinearLayoutManager(this));
+        listView = findViewById(R.id.listView);
 
+        final ArrayList<String> list = new ArrayList<>();
+        final ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.list_item, list);
+        listView.setAdapter(adapter);
 
         reference = FirebaseDatabase.getInstance().getReference().child("Customers");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<Customers>();
-                Toast.makeText(ReceiverActivity.this,"Under construction",Toast.LENGTH_SHORT).show();
 
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                list.clear();
+
+                for(DataSnapshot snapshot: dataSnapshot.getChildren())
                 {
-
-                    customer = dataSnapshot1.getValue(Customers.class);
-                    list.add(customer);
+                    list.add(snapshot.getValue().toString());
                 }
-                adapter = new MyAdapter(ReceiverActivity.this,list);
-                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
             @Override

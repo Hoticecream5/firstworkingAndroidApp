@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import joe.com.steveapp.Model.Users;
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity
 {
     private Button joinNowButton, loginButton;
     private ProgressDialog loadingBar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
