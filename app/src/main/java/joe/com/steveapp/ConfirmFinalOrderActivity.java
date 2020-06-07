@@ -98,7 +98,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity implements Seri
         final String  name = userNameTxt.getText().toString();
         final String phone_Number = userNumber.getText().toString();
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(phone_Number)) {
-            Toast.makeText(ConfirmFinalOrderActivity.this, "Please enter name and phone number ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfirmFinalOrderActivity.this, "Please enter name " +
+                    "and phone number ", Toast.LENGTH_SHORT).show();
         } else {
             final String saveCurrentTime, saveCurrentDate;
 
